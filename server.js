@@ -9,7 +9,7 @@ app.get('/api/weather', async (req, res) => {
     const { city } = req.query;
 
     if (!city) {
-        return res.status(400).json({ error: 'Nie podano miasta' });
+        return res.status(400).json({ error: 'nie ma takiego miasta albo popełniłeś błąd' });
     }
 
     try {
@@ -18,7 +18,7 @@ app.get('/api/weather', async (req, res) => {
         const geoData = await geoResponse.json();
 
         if (!geoData.results || geoData.results.length === 0) {
-            return res.status(404).json({ error: 'Nie znaleziono takiego miasta' });
+            return res.status(404).json({ error: 'trzeba było uważać na geografii' });
         }
 
         const { latitude, longitude, name } = geoData.results[0];
